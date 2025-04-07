@@ -4,7 +4,6 @@ import Image from 'next/image'
 import { Star } from 'lucide-react'
 import React, { useState } from 'react'
 
-// Define mentor item type
 type Mentor = {
   id: number
   image: string
@@ -15,12 +14,11 @@ type Mentor = {
   isFollowed: boolean
 }
 
-// Sample mentor data
 const initialMentors: Mentor[] = [
   {
     id: 1,
     image:
-      'https://plus.unsplash.com/premium_photo-1738091397333-48f0e514b467?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8.jpg',
+      'https://plus.unsplash.com/premium_photo-1738091397333-48f0e514b467?w=500&auto=format&fit=crop&q=60',
     name: 'Curious George',
     designation: 'UIUX Design',
     tasks: '40 tasks',
@@ -30,7 +28,7 @@ const initialMentors: Mentor[] = [
   {
     id: 2,
     image:
-      'https://plus.unsplash.com/premium_photo-1738091397333-48f0e514b467?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8.jpg',
+      'https://plus.unsplash.com/premium_photo-1738091397333-48f0e514b467?w=500&auto=format&fit=crop&q=60',
     name: 'Curious George',
     designation: 'UIUX Design',
     tasks: '40 tasks',
@@ -39,8 +37,7 @@ const initialMentors: Mentor[] = [
   },
 ]
 
-// Component
-export function MentorsItemsList(){
+export function MentorsItemsList() {
   const [mentors, setMentors] = useState<Mentor[]>(initialMentors)
 
   const toggleFollow = (id: number) => {
@@ -56,9 +53,11 @@ export function MentorsItemsList(){
   return (
     <div className='w-full my-5'>
       <h1 className='text-3xl font-semibold text-gray-800'>Monthly Mentors</h1>
-      <div className='mt-5 flex flex-row w-auto gap-6'>
+
+      {/* Responsive Grid */}
+      <div className='mt-5 grid grid-cols-1 sm:grid-cols-2 gap-6'>
         {mentors.map((mentor) => (
-          <div key={mentor.id} className='w-full lg:w-1/2'>
+          <div key={mentor.id} className='w-full'>
             <div className='bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300'>
               {/* Mentor Image and Info */}
               <div className='flex items-center gap-4 mb-4'>
