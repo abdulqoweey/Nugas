@@ -1,22 +1,9 @@
+'use client'
+
 import Image from 'next/image'
-import Link from 'next/link'
-import { FaUser, FaStar } from 'react-icons/fa'; // Importing the Font Awesome User icon
+import { Star } from 'lucide-react' // Lucide star icon
 
 const MentorsItems = [
-  
-
-{
-  image:
-    'https://plus.unsplash.com/premium_photo-1738091397333-48f0e514b467?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8.jpg',
-  name: 'Curious George',
-  designation: 'UIUX Design',
-  tasks: '40 tasks',
-  reviews: '4.5(750 reviews)',
-  taskicons: <FaStar />, // Using the Font Awesome User icon
-  followstatus: 'Followed',
-},
-
-
   {
     image:
       'https://plus.unsplash.com/premium_photo-1738091397333-48f0e514b467?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8.jpg',
@@ -24,7 +11,15 @@ const MentorsItems = [
     designation: 'UIUX Design',
     tasks: '40 tasks',
     reviews: '4.5(750 reviews)',
-    taskicons: <FaStar />,
+    followstatus: 'Followed',
+  },
+  {
+    image:
+      'https://plus.unsplash.com/premium_photo-1738091397333-48f0e514b467?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8.jpg',
+    name: 'Curious George',
+    designation: 'UIUX Design',
+    tasks: '40 tasks',
+    reviews: '4.5(750 reviews)',
     followstatus: 'Followed',
   },
 ]
@@ -33,11 +28,9 @@ export function MentorsItemsList() {
   return (
     <div className='h-fit w-full my-5'>
       <h1 className='text-3xl font-semibold text-gray-800'>Monthly Mentors</h1>
-      <div className='mt-5 flex flex-row gap-6'>
+      <div className='mt-5 flex flex-row gap-6 flex-wrap'>
         {MentorsItems.map((mentors, index) => (
           <div key={index} className='w-full lg:w-1/2'>
-          
-            {/* Each card takes 50% width on larger screens */}
             <div className='bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300'>
               {/* Mentor Image and Info */}
               <div className='flex items-center gap-4 mb-4'>
@@ -50,7 +43,7 @@ export function MentorsItemsList() {
                     className='p-1 rounded-full border'
                   />
                 </div>
-                <div>
+                <div className='flex-1'>
                   <h2 className='font-semibold text-xl text-gray-800'>
                     {mentors.name}
                   </h2>
@@ -65,12 +58,12 @@ export function MentorsItemsList() {
 
               {/* Mentor Stats */}
               <div className='flex justify-between items-center text-xs text-gray-600'>
-                <p>
-                  <span className='font-semibold'>{mentors.taskicons}</span>
+                <p className='flex items-center gap-1'>
+                  <Star className='h-4 w-4 text-yellow-500' />
                   {mentors.tasks}
                 </p>
-                <p>
-                  <span className='font-semibold'>{mentors.taskicons}</span>
+                <p className='flex items-center gap-1'>
+                  <Star className='h-4 w-4 text-yellow-500' />
                   {mentors.reviews}
                 </p>
               </div>
