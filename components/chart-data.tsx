@@ -6,9 +6,9 @@ import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts'
 import {
   Card,
   CardContent,
-  CardDescription,
+  // CardDescription,
   CardHeader,
-  CardTitle,
+  // CardTitle,
 } from '@/components/ui/card'
 import {
   ChartConfig,
@@ -153,9 +153,8 @@ export function ChartData() {
   return (
     <div>
       <div className='lg:flex flex-row justify-between place-items-center'>
-        
         <h1 className='font-bold'>Activity</h1>
-        
+
         <Select value={timeRange} onValueChange={setTimeRange}>
           <SelectTrigger
             className='w-[160px]  sm:ml-auto'
@@ -175,7 +174,6 @@ export function ChartData() {
             </SelectItem>
           </SelectContent>
         </Select>
-        
       </div>
       <Card>
         <CardHeader className='flex items-center gap-2 py-5 lg:py-3 sm:flex-row'>

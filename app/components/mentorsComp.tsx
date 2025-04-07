@@ -1,36 +1,64 @@
 'use client'
 
 import Image from 'next/image'
-import { Star } from 'lucide-react' // Lucide star icon
+import { Star } from 'lucide-react'
+import React, { useState } from 'react'
 
-const MentorsItems = [
+// Define mentor item type
+type Mentor = {
+  id: number
+  image: string
+  name: string
+  designation: string
+  tasks: string
+  reviews: string
+  isFollowed: boolean
+}
+
+// Sample mentor data
+const initialMentors: Mentor[] = [
   {
+    id: 1,
     image:
       'https://plus.unsplash.com/premium_photo-1738091397333-48f0e514b467?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8.jpg',
     name: 'Curious George',
     designation: 'UIUX Design',
     tasks: '40 tasks',
     reviews: '4.5(750 reviews)',
-    followstatus: 'Followed',
+    isFollowed: true,
   },
   {
+    id: 2,
     image:
       'https://plus.unsplash.com/premium_photo-1738091397333-48f0e514b467?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8.jpg',
     name: 'Curious George',
     designation: 'UIUX Design',
     tasks: '40 tasks',
     reviews: '4.5(750 reviews)',
-    followstatus: 'Followed',
+    isFollowed: false,
   },
 ]
 
-export function MentorsItemsList() {
+// Component
+export function MentorsItemsList(){
+  const [mentors, setMentors] = useState<Mentor[]>(initialMentors)
+
+  const toggleFollow = (id: number) => {
+    setMentors((prev) =>
+      prev.map((mentor) =>
+        mentor.id === id
+          ? { ...mentor, isFollowed: !mentor.isFollowed }
+          : mentor
+      )
+    )
+  }
+
   return (
-    <div className='h-fit w-full my-5'>
+    <div className='w-full my-5'>
       <h1 className='text-3xl font-semibold text-gray-800'>Monthly Mentors</h1>
-      <div className='mt-5 flex flex-row gap-6 flex-wrap'>
-        {MentorsItems.map((mentors, index) => (
-          <div key={index} className='w-full lg:w-1/2'>
+      <div className='mt-5 flex flex-row w-auto gap-6'>
+        {mentors.map((mentor) => (
+          <div key={mentor.id} className='w-full lg:w-1/2'>
             <div className='bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300'>
               {/* Mentor Image and Info */}
               <div className='flex items-center gap-4 mb-4'>
@@ -45,14 +73,21 @@ export function MentorsItemsList() {
                 </div>
                 <div className='flex-1'>
                   <h2 className='font-semibold text-xl text-gray-800'>
-                    {mentors.name}
+                    {mentor.name}
                   </h2>
                   <p className='text-xs font-light text-gray-500'>
-                    {mentors.designation}
+                    {mentor.designation}
                   </p>
                 </div>
-                <button className='text-xs font-semibold text-blue-500 hover:text-blue-600'>
-                  {mentors.followstatus}
+                <button
+                  onClick={() => toggleFollow(mentor.id)}
+                  className={`text-xs font-semibold ${
+                    mentor.isFollowed
+                      ? 'text-green-600 hover:text-green-700'
+                      : 'text-blue-500 hover:text-blue-600'
+                  }`}
+                >
+                  {mentor.isFollowed ? 'Following' : 'Follow'}
                 </button>
               </div>
 
@@ -60,11 +95,11 @@ export function MentorsItemsList() {
               <div className='flex justify-between items-center text-xs text-gray-600'>
                 <p className='flex items-center gap-1'>
                   <Star className='h-4 w-4 text-yellow-500' />
-                  {mentors.tasks}
+                  {mentor.tasks}
                 </p>
                 <p className='flex items-center gap-1'>
                   <Star className='h-4 w-4 text-yellow-500' />
-                  {mentors.reviews}
+                  {mentor.reviews}
                 </p>
               </div>
             </div>
